@@ -30,6 +30,9 @@ class CategoriesResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
+            Text::make(__('Name'), 'name'),
+            Text::make('description', 'description'),
+            Text::make('parent_category_id', 'parent_category_id'),
         ];
     }
 
@@ -55,7 +58,9 @@ class CategoriesResource extends ModelResource
     {
         return [
             ID::make(),
-            Text::make('Title', 'name')
+            Text::make('Title', 'name'),
+            Text::make('Description', 'description'),
+            Text::make('Parent category', 'parent_category_id'),
 
         ];
     }
