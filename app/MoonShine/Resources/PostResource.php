@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use MoonShine\Laravel\Resources\ModelResource;
@@ -24,7 +23,7 @@ class PostResource extends ModelResource
     protected string $model = Post::class;
 
     protected string $title = 'Posts';
-    
+
     /**
      * @return list<FieldContract>
      */
@@ -51,9 +50,9 @@ class PostResource extends ModelResource
                 Text::make('Content'),
                 Image::make('Image'),
                 BelongsTo::make(
-                    'Category', 
-                    'postCategory', 
-                    fn($item) => "{$item->id}. {$item->name}", 
+                    (array)'Category',
+                    'postCategory',
+                    fn($item) => "{$item->id}. {$item->name}",
                     PostCategoryResource::class
                 )
                 ->afterFill(fn($field) => $field->setAttribute('category_id')) // o‘zgartirilgan
