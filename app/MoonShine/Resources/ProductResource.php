@@ -6,10 +6,11 @@ namespace App\MoonShine\Resources;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Product;
-
+use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Text;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
 
@@ -29,6 +30,11 @@ class ProductResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
+            Text::make('Name','name'),
+            Text::make('Description','description'),
+            Text::make('Price','price'),
+            Text::make('Sale_price','sale_price'),
+            Text::make('Stock_quantity','stock_quantity'),
         ];
     }
 
@@ -40,6 +46,23 @@ class ProductResource extends ModelResource
         return [
             Box::make([
                 ID::make(),
+                Text::make('Name','name'),
+                Text::make('Description','description'),
+                Text::make('Price','price'),
+                Text::make('Sale_price','sale_price'),
+                BelongsTo::make(
+                    'ProductCategory',
+                    'productCategory',
+                    fn($item)=>"$item->name",
+                    CategoryResource::class)
+                    ->afterFill(fn($field) => $field->setColumn('id')),
+                BelongsTo::make(
+                    'ProductVolume',
+                    'productVolume',
+                    fn($item)=>"$item->name",
+                    VolumeResource::class)
+                    ->afterFill(fn($field) => $field->setColumn('id')),
+                Text::make('Stock_quantity','stock_quantity'),
             ])
         ];
     }
@@ -51,6 +74,11 @@ class ProductResource extends ModelResource
     {
         return [
             ID::make(),
+            Text::make('Name','name'),
+            Text::make('Description','description'),
+            Text::make('Price','price'),
+            Text::make('Sale_price','sale_price'),
+            Text::make('Stock_quantity','stock_quantity'),
         ];
     }
 

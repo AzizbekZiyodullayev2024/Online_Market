@@ -10,8 +10,10 @@ use App\Models\Category;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Text;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 
 /**
  * @extends ModelResource<Category>
@@ -39,11 +41,17 @@ class CategoryResource extends ModelResource
     {
         return [
             Box::make([
-                ID::make(),
+                // ID::make(),
+                Text::make('Name','name'),
+                BelongsTo::make(
+                    'Category',
+                    'getCategory',
+                    fn($item)=>"$item->id",
+                    CategoryResource::class)
+                    ->afterFill(fn($field) => $field->setColumn('id'))->nullable()
             ])
         ];
     }
-
     /**
      * @return list<FieldContract>
      */

@@ -5,22 +5,23 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\ProductVolumes;
+use App\Models\Volume;
 
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Text;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
 
 /**
- * @extends ModelResource<ProductVolumes>
+ * @extends ModelResource<Volume>
  */
-class ProductVolumesResource extends ModelResource
+class VolumeResource extends ModelResource
 {
-    protected string $model = ProductVolumes::class;
+    protected string $model = Volume::class;
 
-    protected string $title = 'ProductVolumes';
+    protected string $title = 'Volumes';
     
     /**
      * @return list<FieldContract>
@@ -29,6 +30,7 @@ class ProductVolumesResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
+            Text::make('Name'),
         ];
     }
 
@@ -40,6 +42,7 @@ class ProductVolumesResource extends ModelResource
         return [
             Box::make([
                 ID::make(),
+                Text::make('Name','name'),
             ])
         ];
     }
@@ -51,11 +54,12 @@ class ProductVolumesResource extends ModelResource
     {
         return [
             ID::make(),
+            Text::make('Name','name')
         ];
     }
 
     /**
-     * @param ProductVolumes $item
+     * @param Volume $item
      *
      * @return array<string, string[]|string>
      * @see https://laravel.com/docs/validation#available-validation-rules
