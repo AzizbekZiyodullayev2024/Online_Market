@@ -53,15 +53,15 @@ class ProductResource extends ModelResource
                 BelongsTo::make(
                     'ProductCategory',
                     'productCategory',
-                    fn($item)=>"$item->name",
+                    fn($item)=>" $item->id . $item->name",
                     CategoryResource::class)
-                    ->afterFill(fn($field) => $field->setColumn('id')),
+                    ->afterFill(fn($field) => $field->setColumn('category_id'))->nullable(),
                 BelongsTo::make(
                     'ProductVolume',
                     'productVolume',
-                    fn($item)=>"$item->name",
+                    fn($item)=>"$item->id . $item->name",
                     VolumeResource::class)
-                    ->afterFill(fn($field) => $field->setColumn('id')),
+                    ->afterFill(fn($field) => $field->setColumn('product_volume'))->nullable(),
                 Text::make('Stock_quantity','stock_quantity'),
             ])
         ];
@@ -73,11 +73,13 @@ class ProductResource extends ModelResource
     protected function detailFields(): iterable
     {
         return [
-            ID::make(),
+            ID::make('ID','id'),
             Text::make('Name','name'),
             Text::make('Description','description'),
             Text::make('Price','price'),
             Text::make('Sale_price','sale_price'),
+            Text::make('Category_id','category_id'),
+            Text::make('Volume','product_volume'),
             Text::make('Stock_quantity','stock_quantity'),
         ];
     }

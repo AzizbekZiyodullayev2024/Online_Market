@@ -6,7 +6,7 @@ namespace App\MoonShine\Resources;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
-
+use MoonShine\Laravel\Fields\Relationships\HasMany;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
@@ -31,6 +31,7 @@ class CategoryResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
+            Text::make('Name','name'),
         ];
     }
 
@@ -41,14 +42,14 @@ class CategoryResource extends ModelResource
     {
         return [
             Box::make([
-                // ID::make(),
+                ID::make(),
                 Text::make('Name','name'),
                 BelongsTo::make(
                     'Category',
                     'getCategory',
-                    fn($item)=>"$item->id",
+                    fn($item)=>"$item->id. $item->name",
                     CategoryResource::class)
-                    ->afterFill(fn($field) => $field->setColumn('id'))->nullable()
+                    ->afterFill(fn($field) => $field->setColumn('parent_id'))->nullable()
             ])
         ];
     }
@@ -59,8 +60,12 @@ class CategoryResource extends ModelResource
     {
         return [
             ID::make(),
+            Text::make('Name','name'),
+            Text::make('Parent_id','parent_id'),
+            HasMany::make('products'),
         ];
     }
+    
 
     /**
      * @param Category $item
