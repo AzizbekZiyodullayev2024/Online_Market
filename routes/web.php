@@ -17,3 +17,13 @@ Route::get('/register', function () {
 Route::get('/contact_us', function () {
     return view('contact_us');
 });
+
+Route::post('/upload_file',function(){
+    $request = $request();
+    $file = $request->file('file');
+    dd($file);
+});
+
+Route::get('/upload_file',function(){
+    return view('upload_file');
+});
