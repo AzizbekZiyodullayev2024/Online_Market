@@ -22,4 +22,7 @@ class Product extends Model
     {
         return $this->belongsTo(Volume::class, 'product_volume', 'id');
     }
+    public function images(){
+        return $this->morphMany(Image::class,'imageable');
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('index');
@@ -19,9 +20,9 @@ Route::get('/contact_us', function () {
 });
 
 Route::post('/upload_file',function(){
-    $request = $request();
-    $file = $request->file('file');
-    dd($file);
+    $file = request()->file('file');
+    $file_path = $file->store('uploads','public');
+    dd($file_path);
 });
 
 Route::get('/upload_file',function(){

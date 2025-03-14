@@ -6,7 +6,9 @@ namespace App\MoonShine\Resources;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
+use App\Models\Image;
 use MoonShine\Laravel\Fields\Relationships\HasMany;
+use MoonShine\Laravel\Fields\Relationships\MorphMany;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
@@ -49,8 +51,9 @@ class CategoryResource extends ModelResource
                     'getCategory',
                     fn($item)=>"$item->id. $item->name",
                     CategoryResource::class)
-                    ->afterFill(fn($field) => $field->setColumn('parent_id'))->nullable()
-            ])
+                    ->afterFill(fn($field) => $field->setColumn('parent_id'))->nullable(),
+                MorphMany::make('Images','images')->fields([ImageResource::class]),
+                ])
         ];
     }
     /**
@@ -63,6 +66,7 @@ class CategoryResource extends ModelResource
             Text::make('Name','name'),
             Text::make('Parent_id','parent_id'),
             HasMany::make('products'),
+            MorphMany::make('Images','images',resource:ImageResource::class),
         ];
     }
     

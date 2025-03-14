@@ -15,4 +15,7 @@ class Category extends Model
     {
         return $this->hasMany(Product::class, 'category_id','id');
     }
+    public function images(){
+        return $this->morphMany(Image::class,'imageable','imageable_type');
+    }
 }
