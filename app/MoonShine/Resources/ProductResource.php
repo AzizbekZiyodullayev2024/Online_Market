@@ -7,6 +7,7 @@ namespace App\MoonShine\Resources;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Product;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use MoonShine\Laravel\Fields\Relationships\MorphMany;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
@@ -35,6 +36,7 @@ class ProductResource extends ModelResource
             Text::make('Price','price'),
             Text::make('Sale_price','sale_price'),
             Text::make('Stock_quantity','stock_quantity'),
+            File::make("Images","images"),
         ];
     }
 
@@ -56,13 +58,14 @@ class ProductResource extends ModelResource
                     fn($item)=>" $item->id . $item->name",
                     CategoryResource::class)
                     ->afterFill(fn($field) => $field->setColumn('category_id'))->nullable(),
-                BelongsTo::make(
+                BelongsTo::make( 
                     'ProductVolume',
                     'productVolume',
                     fn($item)=>"$item->id . $item->name",
                     VolumeResource::class)
                     ->afterFill(fn($field) => $field->setColumn('product_volume'))->nullable(),
                 Text::make('Stock_quantity','stock_quantity'),
+                MorphMany::make("Images","images",resource:ImageResource::class),
             ])
         ];
     }
@@ -81,6 +84,7 @@ class ProductResource extends ModelResource
             Text::make('Category_id','category_id'),
             Text::make('Volume','product_volume'),
             Text::make('Stock_quantity','stock_quantity'),
+            MorphMany::make("Images","images"),
         ];
     }
 
