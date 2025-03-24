@@ -32,11 +32,27 @@
                 <div class="w-full">
                     <div class="hero-slider swiper-container">
                         <div class="swiper-wrapper">
+                            <?php $banners = \App\Models\TopBanner::query()->where('position','top')->get();?>
+                            
+                            @foreach($banners as $banner)
+                                <?php
+                                    $title = trim(preg_replace('/\s+/', ' ', $banner->title));
+                                    $words = explode(" ",$title);
+                                    if(isset($words[1])){
+                                        $words[1] = '<span class="relative text-[#6o7fd8]">' . $words[1] . '</span>';
+                                    }
+                                    $title = implode("",$words);
+                                ?>
+                            
                             <div class="swiper-slide slide-1">
                                 <div class="flex flex-wrap w-full mb-[-24px]"> 
                                     <div class="min-[992px]:w-[50%] w-full px-[12px] min-[992px]:order-1 order-2 mb-[24px]">
                                         <div class="hero-contact h-full flex flex-col items-start justify-center max-[991px]:items-center">
-                                            <p class="mb-[20px] font-Poppins text-[18px] text-[#777] font-light leading-[28px] tracking-[0.03rem] max-[1199px]:mb-[10px] max-[1199px]:text-[16px]">Flat 30% Off</p>
+                            
+                                            <p class="mb-[20px] font-Poppins text-[18px] text-[#777] font-light leading-[28px] tracking-[0.03rem] max-[1199px]:mb-[10px] max-[1199px]:text-[16px]">
+                                                {{ $banner->description }}
+                                            </p>
+                                
                                             <h1 class="mb-[20px] font-quicksand text-[50px] text-[#3d4750] font-bold tracking-[0.03rem] leading-[1.2] max-[1199px]:mb-[10px] max-[1199px]:text-[38px] max-[991px]:text-center max-[991px]:text-[45px] max-[767px]:text-[40px] max-[575px]:text-[35px] max-[420px]:text-[30px] max-[360px]:text-[28px]">Explore<span class="relative text-[#6c7fd8]">Healthy</span><br> & Fresh Fruits</h1>
                                             <a href="shop-left-sidebar-col-3.html" class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[8px] px-[20px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] max-[1199px]:py-[3px] max-[1199px]:px-[15px] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop Now</a>
                                         </div>
@@ -54,55 +70,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide slide-2">
-                                <div class="flex flex-wrap w-full mb-[-24px]">
-                                    <div class="min-[992px]:w-[50%] w-full px-[12px] min-[992px]:order-1 order-2 mb-[24px]">
-                                        <div class="hero-contact h-full flex flex-col items-start justify-center max-[991px]:items-center">
-                                            <p class="mb-[20px] font-Poppins text-[18px] text-[#777] font-light leading-[28px] tracking-[0.03rem] max-[1199px]:mb-[10px] max-[1199px]:text-[16px]">Flat 20% Off</p>
-                                            <h2 class="mb-[20px] font-quicksand text-[50px] text-[#3d4750] font-bold tracking-[0.03rem] leading-[1.2] max-[1199px]:mb-[10px] max-[1199px]:text-[38px] max-[991px]:text-center max-[991px]:text-[45px] max-[767px]:text-[40px] max-[575px]:text-[35px] max-[420px]:text-[30px] max-[360px]:text-[28px]">Explore <span class="relative text-[#6c7fd8]">Warm</span><br> Fast Food & Snacks</h2>
-                                            <a href="shop-left-sidebar-col-3.html" class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[8px] px-[20px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] max-[1199px]:py-[3px] max-[1199px]:px-[15px] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop Now</a>
-                                        </div>
-                                    </div>
-                                    <div class="min-[992px]:w-[50%] w-full px-[12px] min-[992px]:order-2 order-1 mb-[24px]">
-                                        <div class="hero-image pr-[50px] relative max-[991px]:px-[50px] max-[575px]:px-[30px] flex justify-center max-[420px]:p-[0]">
-                                            <img src="assets/img/hero/hero-2.png" alt="hero" class="w-full pb-[50px] opacity-[1] max-[1199px]:pr-[30px] max-[991px]:pr-[0] max-[575px]:pb-[30px] max-[420px]:pb-[15px]">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" class="animate-shape w-[120%] absolute top-[-50px] right-[-50px] z-[-1] max-[1399px]:right-[-30px] max-[1199px]:w-[125%] max-[991px]:w-[100%] max-[991px]:top-[0] max-[575px]:right-[0] max-[420px]:w-[110%] max-[420px]:right-[-30px]">
-                                                <linearGradient id="shape_2" x1="80%" x2="0%" y1="80%" y2="0%">
-                                                </linearGradient>
-                                                <path d="">
-                                                    <animate repeatCount="indefinite" attributeName="d" dur="15s"
-                                                        values="" />
-                                                </path>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide slide-3">
-                                <div class="flex flex-wrap w-full mb-[-24px]">
-                                    <div class="min-[992px]:w-[50%] w-full px-[12px] min-[992px]:order-1 order-2 mb-[24px]">
-                                        <div class="hero-contact h-full flex flex-col items-start justify-center max-[991px]:items-center">
-                                            <p class="mb-[20px] font-Poppins text-[18px] text-[#777] font-light leading-[28px] tracking-[0.03rem] max-[1199px]:mb-[10px] max-[1199px]:text-[16px]">Flat 30% Off</p>
-                                            <h2 class="mb-[20px] font-quicksand text-[50px] text-[#3d4750] font-bold tracking-[0.03rem] leading-[1.2] max-[1199px]:mb-[10px] max-[1199px]:text-[38px] max-[991px]:text-center max-[991px]:text-[45px] max-[767px]:text-[40px] max-[575px]:text-[35px] max-[420px]:text-[30px] max-[360px]:text-[28px]">Explore <span class="relative text-[#6c7fd8]">Organic</span><br> & Fresh Vegetables</h2>
-                                            <a href="shop-left-sidebar-col-3.html" class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[8px] px-[20px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] max-[1199px]:py-[3px] max-[1199px]:px-[15px] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop Now</a>
-                                        </div>
-                                    </div>
-                                    <div class="min-[992px]:w-[50%] w-full px-[12px] min-[992px]:order-2 order-1 mb-[24px]">
-                                        <div class="hero-image pr-[50px] relative max-[991px]:px-[50px] max-[575px]:px-[30px] flex justify-center max-[420px]:p-[0]">
-                                            <img src="assets/img/hero/hero-3.png" alt="hero" class="w-full pb-[50px] opacity-[1] max-[1199px]:pr-[30px] max-[991px]:pr-[0] max-[575px]:pb-[30px] max-[420px]:pb-[15px]">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" class="animate-shape w-[120%] absolute top-[-50px] right-[-50px] z-[-1] max-[1399px]:right-[-30px] max-[1199px]:w-[125%] max-[991px]:w-[100%] max-[991px]:top-[0] max-[575px]:right-[0] max-[420px]:w-[110%] max-[420px]:right-[-30px]">
-                                                <linearGradient id="shape_3" x1="80%" x2="0%" y1="80%" y2="0%">
-                                                </linearGradient>
-                                                <path d="">
-                                                    <animate repeatCount="indefinite" attributeName="d" dur="15s"
-                                                        values="" />
-                                                </path>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
+                        
                         <div class="swiper-pagination swiper-pagination-white"></div>
                         <div class="swiper-buttons">
                             <div class="swiper-button-next"></div>

@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Product;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Fields\Relationships\MorphMany;
+use MoonShine\Laravel\Fields\Relationships\HasMany;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\UI\Fields\File;
 
 /**
  * @extends ModelResource<Product>
@@ -36,7 +38,6 @@ class ProductResource extends ModelResource
             Text::make('Price','price'),
             Text::make('Sale_price','sale_price'),
             Text::make('Stock_quantity','stock_quantity'),
-            File::make("Images","images"),
         ];
     }
 
@@ -65,7 +66,7 @@ class ProductResource extends ModelResource
                     VolumeResource::class)
                     ->afterFill(fn($field) => $field->setColumn('product_volume'))->nullable(),
                 Text::make('Stock_quantity','stock_quantity'),
-                MorphMany::make("Images","images",resource:ImageResource::class),
+                MorphMany::make("Images","images"),
             ])
         ];
     }

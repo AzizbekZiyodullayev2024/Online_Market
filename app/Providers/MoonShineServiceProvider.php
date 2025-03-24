@@ -18,6 +18,7 @@ use App\MoonShine\Resources\CategoryResource;
 use App\MoonShine\Resources\ProductVolumesResource;
 use App\MoonShine\Resources\VolumeResource;
 use App\MoonShine\Resources\ImageResource;
+use App\MoonShine\Resources\TopBannersResource;
 class MoonShineServiceProvider extends ServiceProvider
 {
     /**
@@ -39,6 +40,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 CategoryResource::class,
                 VolumeResource::class,
                 ImageResource::class,
+                TopBannersResource::class,
             ])
             ->pages([
                 ...$config->getPages(),
