@@ -1,10 +1,7 @@
-@props(['src','type'])
-<div>
-    <!-- It is never too late to be what you might have been. - George Eliot -->
-</div>
+@props(['src', 'type'])
 
-@if($type === 'js')
+@if ($type === 'js')
     <script src="{{ $src }}"></script>
-@elseif($type === 'css')
+@elseif($type   === 'css')
     <link rel="stylesheet" href="{{ $src }}">
 @endif

@@ -6,23 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    // protected static function boot()
-    // {
-    //     parent::boot();
-    //     static::creating(function ($model){
-    //         $model->slug= Carbon::now(). Str::slug($model->title);
-    //     });
-    // }
+    protected $fillable = [
+        'product_id',
+        'name',
+        'description',
+        'price',
+        'sale_price',
+        'category_id',
+        'volume_id', // Bu 'volume_id' emas!
+        'stock_quantity',
+    ];
 
-    public function productCategory()
+    public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
-    public function productVolume()
+
+    public function volume()
     {
-        return $this->belongsTo(Volume::class, 'product_volume', 'id');
+        return $this->belongsTo(Volume::class, 'volume_id', 'id');
     }
-    public function images(){
-        return $this->morphMany(Image::class,'imageable');
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 }

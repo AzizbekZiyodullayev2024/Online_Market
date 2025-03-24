@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('top_banners', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('description');
-            $table->string('image');
-            $table->timestamps();
+        Schema::table('banners', function (Blueprint $table) {
+            $table->string('position')->after('image')->nullable();
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('top_banners');
+        Schema::table('banner', function (Blueprint $table) {
+            //
+        });
     }
 };
