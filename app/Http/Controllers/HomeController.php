@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\TopBanner;
+
+use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Product;
+use App\Models\TopBanner;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -59,41 +61,31 @@ class HomeController extends Controller
             ->orderBy('id', 'desc')
                 ->limit(10)
                     ->get();
-        return view('index',[
+        return view('welcome',[
             'topBanners' => $topBanners,
-            // 'midBanner' => $midBanner,
-            // 'bottomBanner' => $bottomBanner,
-            // 'oneBottomBanners' => $oneBottomBanners,
+            'midBanner' => $midBanner,
+            'bottomBanner' => $bottomBanner,
+            'oneBottomBanners' => $oneBottomBanners,
             'categories' => $categories,
             'latestPosts' => $latestPosts,
             'parentCategories' => $parentCategories,
+            'insPosts' => $insPosts,
             'products' => $products,
             'productsMenu' => $productsMenu,
-            'insPosts'=>$insPosts,
         ]);
     }
-    public function show()
+
+
+    public function show(string $id)
     {
-        $categories = Category::query()
-            ->orderBy('id', 'desc')
-            ->with(['images', 'parent'])
-            ->get();
         $parentCategories = Category::query()
             ->whereNull('parent_id')
-            ->orderBy('id', 'desc')
-            ->limit(4)
-            ->with('categories')
-            ->get();
-        $filters = request()->input('filters');
-        $products = Product::query()
-            ->orderBy('id', 'desc')
-            ->with(['category', 'volume']) // Added 'volume' to eager load the relationship
-            ->limit(10)
-            ->get();
-        return view('product-filter', [
-            'products' => $products,
-            'categories' => $categories,
-            'parentCategories' => $parentCategories,
+                ->orderBy('id', 'desc')
+                    ->limit(4)
+                        ->with('categories')
+                            ->get();
+        return view('product-filter',[
+            'parentCategories' => $parentCategories
         ]);
     }
 }

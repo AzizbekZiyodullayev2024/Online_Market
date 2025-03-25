@@ -1,4 +1,6 @@
+
 <x-header title="Online Market"></x-header>
+
 
 <!-- Loader -->
 <div
@@ -8,9 +10,7 @@
 </div>
 
 <!-- Header -->
-
 <x-navbar :parentCategories="$parentCategories" :productsMenu="$productsMenu"></x-navbar>
-
 <!-- Hero -->
 <section class="section-hero mb-[50px] max-[1199px]:mb-[35px] py-[50px] relative bg-[#f8f8fb] overflow-hidden">
     <div
@@ -19,6 +19,8 @@
             <div class="w-full">
                 <div class="hero-slider swiper-container">
                     <div class="swiper-wrapper">
+
+
 
                         @foreach($topBanners as $banner)
                                 <?php
@@ -113,7 +115,7 @@
                     </div>
                     <div
                         class="bb-category-block owl-carousel ml-[-150px] w-[calc(100%+150px)] pt-[30px] pl-[30px] bg-[#fff] rounded-tl-[30px] relative max-[991px]:ml-[0] max-[991px]:w-full max-[991px]:p-[0]">
-                        @foreach($parentCategories as $category)
+                        @foreach($categories as $category)
                             <div
                                 class="bb-category-box p-[30px] rounded-[20px] flex flex-col items-center text-center max-[1399px]:p-[20px] category-items-1 bg-[#fef1f1]"
                                 data-aos="flip-left" data-aos-duration="1000" data-aos-delay="200">
@@ -1188,7 +1190,9 @@
 <!-- Quick view Modal -->
 <x-quick-view-modal></x-quick-view-modal>
 <!-- Newsletter Modal -->
-<x-newsletter-modal ></x-newsletter-modal>
+<x-newsletter-modal></x-newsletter-modal>
+<!-- Tools Sidebar -->
+<x-tools-sidebar></x-tools-sidebar>
 <!-- Back to top  -->
 <x-back-to-top></x-back-to-top>
 <!-- Plugins -->
